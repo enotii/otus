@@ -1,1 +1,1 @@
-# otus
+# otus Java professional
