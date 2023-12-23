@@ -15,11 +15,6 @@ public class Utils {
             throw new RuntimeException(e);
         }
     }
-
-    public static Class<?>[] toClasses(Object[] args) {
-        return Arrays.stream(args).map(Object::getClass).toArray(Class<?>[]::new);
-    }
-
     public static List<Method> getAnnotatedMethod(Method[] declaredMethods, Class<?> annotation, Class<?> clazz) {
         List<Method> methodsVsAnnotation = new ArrayList<>();
         for (Method m : declaredMethods) {
