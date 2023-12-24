@@ -10,19 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestExecutor {
-    public static void execute(Class<?> testedClass) throws ClassNotFoundException {
-        TestExecutor testExecutor = new TestExecutor();
+    public void execute(Class<?> testedClass) throws ClassNotFoundException {
+
         Class<?> clazz = Class.forName(testedClass.getName());
         int failedTestsCounter = 0;
 
-        List<Method> beforeMethods = testExecutor.getAnnotatedMethod(clazz.getDeclaredMethods(), Before.class, clazz);
-        List<Method> testMethods = testExecutor.getAnnotatedMethod(clazz.getDeclaredMethods(), Test.class, clazz);
-        List<Method> afterMethods = testExecutor.getAnnotatedMethod(clazz.getDeclaredMethods(), After.class, clazz);
+        List<Method> beforeMethods = getAnnotatedMethod(clazz.getDeclaredMethods(), Before.class, clazz);
+        List<Method> testMethods = getAnnotatedMethod(clazz.getDeclaredMethods(), Test.class, clazz);
+        List<Method> afterMethods = getAnnotatedMethod(clazz.getDeclaredMethods(), After.class, clazz);
 
         for (Method methods : testMethods) {
-            Object objectClass = testExecutor.createObjectClass(clazz);
-            testExecutor.runTests(beforeMethods, objectClass);
+            Object objectClass = createObjectClass(clazz);
             try {
+                runTests(beforeMethods, objectClass);
                 methods.invoke(objectClass);
                 System.out.println(methods.getName());
                 System.out.println("----SUCCESS----");
@@ -31,9 +31,11 @@ public class TestExecutor {
                 System.out.println("----FAILED----");
                 failedTestsCounter++;
             }
-            testExecutor.runTests(afterMethods, objectClass);
+            finally {
+                runTests(afterMethods, objectClass);
+            }
         }
-        testExecutor.printStatisticForTest(testMethods.size(), failedTestsCounter);
+        printStatisticForTest(testMethods.size(), failedTestsCounter);
     }
 
     private <T> T instantiate(Class<T> type) {
