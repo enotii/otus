@@ -6,12 +6,14 @@ import ru.otus.annotations.Test;
 
 public class Tests {
     @Before
+    public void before1() {
         String hello1 = "Hello World";
+    }
+
 
     @Test
     public void test1() {
-        "Hello World".equals(hello1);
-        // System.out.println(hello);
+        "Hello World".equals("hello1");
     }
 
     @After
@@ -20,12 +22,14 @@ public class Tests {
     }
 
     @Before
+    public void before2() {
         String hello2 = "Hello World";
+    }
 
 
     @Test
     public void test2() throws Exception {
-        if (!"sdfsda".equals(hello2))
+        if (!"sdfsda".equals("hello2"))
             throw new Exception("press F");
     }
 
@@ -35,12 +39,14 @@ public class Tests {
     }
 
     @Before
-    String hello3 = "Hello";
+    public void before3() {
+        String hello3 = "Hello World";
+    }
 
 
     @Test
     public void test3() throws Exception {
-        System.out.println(hello3);
+        System.out.println("hello3");
     }
 
     @After
