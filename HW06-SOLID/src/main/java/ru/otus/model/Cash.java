@@ -2,16 +2,34 @@ package ru.otus.model;
 
 import ru.otus.enums.CashNominalEnum;
 
-public interface Cash {
-    int getAmount();
+public class Cash {
+    private final CashNominalEnum cashNominalEnum;
+    private int amount;
 
-    int getNominal();
+    public Cash(CashNominalEnum cashNominalEnum, int amount) {
+        this.cashNominalEnum = cashNominalEnum;
+        this.amount = amount;
+    }
 
-    void setAmount(int quantity);
 
-    int getTotal();
+    public int getAmount() {
+        return amount;
+    }
 
-    Cash createInstance(CashNominalEnum cashNominalEnum, int cash);
 
-    CashNominalEnum getMoney();
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+
+    public int getTotal() {
+        return cashNominalEnum.getNominal() * amount;
+    }
+
+
+    public int getNominal() {
+        return cashNominalEnum.getNominal();
+    }
+
+
 }

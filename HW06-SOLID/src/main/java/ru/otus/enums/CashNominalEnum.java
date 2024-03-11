@@ -6,7 +6,7 @@ public enum CashNominalEnum {
     FIFTY(50),
     ONEHUNDRED(100),
     FIVEHUNDRED(500),
-    THOUSAND(1000),
+    ONETHOUSAND(1000),
     FIVETHOUSAND(5000);
 
     private final int nominal;
@@ -18,4 +18,14 @@ public enum CashNominalEnum {
     public int getNominal() {
         return nominal;
     }
+
+    public static CashNominalEnum getCashNominalEnum(Integer nominal) {
+        for (CashNominalEnum v : values()) {
+            if (v.getNominal() == nominal) {
+                return v;
+            }
+        }
+        return null;
+    }
+
 }
