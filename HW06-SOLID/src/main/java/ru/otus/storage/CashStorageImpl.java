@@ -46,11 +46,10 @@ public class CashStorageImpl implements CashStorage {
         List<Cash> result = new ArrayList<>();
         List<CashNominalEnum> sortedList = new ArrayList<>();
         int stashSum = sum;
+        sortedList.addAll(cashStorage.keySet());
 
-        for (Map.Entry<CashNominalEnum, Integer> entry : cashStorage.entrySet()) {
-            sortedList.add(entry.getKey());
-        }
-        Collections.sort(sortedList,  Collections.reverseOrder((Comparator.comparing(CashNominalEnum::getNominal))));
+        Comparator<CashNominalEnum> comparing = Comparator.comparing(CashNominalEnum::getNominal);
+        Collections.sort(sortedList,   Collections.reverseOrder(comparing));
 
         for(CashNominalEnum nominal : sortedList){
             while (sum > nominal.getNominal()){

@@ -1,7 +1,6 @@
 package ru.otus.service;
 
 import ru.otus.model.Cash;
-import ru.otus.storage.CashStorage;
 
 import java.util.List;
 
@@ -10,5 +9,5 @@ public interface CashManager {
 
     List<Cash> takeCash(Integer sum);
 
-    CashStorage getStorage();
+    Integer getTotalBalance();
 }

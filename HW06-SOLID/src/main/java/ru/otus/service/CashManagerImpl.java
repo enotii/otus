@@ -5,7 +5,6 @@ import ru.otus.exception.CashTransactionException;
 import ru.otus.model.Cash;
 import ru.otus.storage.CashStorage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,17 +26,13 @@ public class CashManagerImpl implements CashManager {
         if(sum < 0){
             throw new CashTransactionException(ErrorMessageEnum.TAKE_CASH_ERROR.getMessage());
         }
-        List<Cash> resultCash = new ArrayList<>();
-        if (cashStorage.getTotalBalance() < sum) {
+        else if (cashStorage.getTotalBalance() < sum) {
             throw new CashTransactionException(ErrorMessageEnum.NO_MONEY.getMessage());
-        } else {
-            resultCash = cashStorage.takeCash(sum);
         }
-        return resultCash;
+        return  cashStorage.takeCash(sum);
     }
 
-    @Override
-    public CashStorage getStorage() {
-        return this.cashStorage;
+    public Integer getTotalBalance() {
+        return this.cashStorage.getTotalBalance();
     }
 }

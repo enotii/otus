@@ -36,7 +36,7 @@ public class CashManagerTest {
                         new Cash(CashNominalEnum.FIVEHUNDRED, 2),
                         new Cash(CashNominalEnum.ONETHOUSAND, 2)
                 ));
-        assertEquals(3120, cashManager.getStorage().getTotalBalance());
+        assertEquals(3120, cashManager.getTotalBalance());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class CashManagerTest {
             e = ex.getMessage().toString();
         }
         assertEquals(e, ErrorMessageEnum.AMOUNT_IS_NEGATIVE.getMessage());
-        assertEquals(1120, cashManager.getStorage().getTotalBalance());
+        assertEquals(1120, cashManager.getTotalBalance());
 
     }
 
@@ -92,7 +92,7 @@ public class CashManagerTest {
                         new Cash(CashNominalEnum.FIVEHUNDRED, 2)
                 ));
         cashManager.takeCash(50);
-        assertEquals(1070, cashManager.getStorage().getTotalBalance());
+        assertEquals(1070, cashManager.getTotalBalance());
     }
 
     @Test
